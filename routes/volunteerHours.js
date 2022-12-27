@@ -98,6 +98,15 @@ router.route("/delete").post((req, res) => {
     .catch((err) => res.status(400).json("Error " + err));
 });
 
+router.route("/deleteAll").post((req, res) => {
+  const userID = req.body.userID;
+  VolunteerRecord.findOneAndDelete({ userID: userID })
+    .then((item) => {
+      res.json(item);
+    })
+    .catch((err) => res.status(400).json("Error " + err));
+});
+
 router.route("/getItem/:userID/:_id").get((req, res) => {
   const userID = req.params.userID;
   const _id = req.params._id;
